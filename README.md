@@ -66,6 +66,7 @@ Decrypted Text=This is a plain text, encrypting it with AES/GCM/NoPadding algo w
 
 
 # Dart/Flutter Code (Create a dart class crypto_utl.dart and add below code)
+package used https://pub.dev/packages/encrypt
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:crypto/crypto.dart';
@@ -93,5 +94,6 @@ String enc =
       'R4Z7BmHFVQgqrKf0aNpxbGatt5NSyeJRMQJXGEE6KC5Cf4yXxM9NEwwpIq3IYrWq2kVvMLFIXzDYfLcOcbYnSEV3cWxRoGN+TzZZnd29aM2cW6pHmjA7kMIzWpzXTUU=';
   String decTExt = decryptAESGCM(enc, 'testkey123456789', 'VtnYPGZ6KELIKmqt');
   print(decTExt);
+  
 # Output 
 flutter: This is a plain text, encrypting it with AES/GCM/NoPadding algo with 12 byte IV
