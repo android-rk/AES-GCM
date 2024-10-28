@@ -1,15 +1,16 @@
 # AES-GCM
 Here is the below example of AES-GCm with 128 bit encryption and decryption with Java and Dart/Flutter compatible.
-# Java Code
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.GCMParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
-import java.security.SecureRandom;
-import java.util.Base64;
 
-class AesGcm {
+# Java Code
+
+import javax.crypto.Cipher;<br/>
+import javax.crypto.KeyGenerator;<br/>
+import javax.crypto.SecretKey;<br/>
+import javax.crypto.spec.GCMParameterSpec;<br/>
+import javax.crypto.spec.SecretKeySpec;<br/>
+import java.security.SecureRandom;<br/>
+import java.util.Base64;<br/>
+class AesGcm {<br/>
    private static final String ALGO = "AES/GCM/NoPadding";
     
     public static String base64IV()
@@ -66,34 +67,31 @@ Decrypted Text=This is a plain text, encrypting it with AES/GCM/NoPadding algo w
 
 
 # Dart/Flutter Code (Create a dart class crypto_utl.dart and add below code)
-package used https://pub.dev/packages/encrypt
-import 'dart:convert';
-import 'dart:typed_data';
-import 'package:crypto/crypto.dart';
-import 'package:encrypt/encrypt.dart';
 
-String encryptAESGCM(String plainText, String base64Key, String base64IV) {
-  final encrypter =
-      Encrypter(AES(Key(base64Decode(base64Key)), mode: AESMode.gcm));
-  final encrypted = encrypter.encrypt(plainText, iv: IV.fromBase64(base64IV));
-  return encrypted.base64;
-}
+package used https://pub.dev/packages/encrypt <br/>
+import 'dart:convert';<br/>
+import 'dart:typed_data';<br/>
+import 'package:crypto/crypto.dart';<br/>
+import 'package:encrypt/encrypt.dart';<br/>
 
-String decryptAESGCM(
-    String encryptedText, String decryptionKey, String ivBase64) {
-  IV iv = IV.fromBase64(ivBase64);
-  Uint8List key = getUint8List(decryptionKey);
-  final encrypter =
-      Encrypter(AES(Key(key), mode: AESMode.gcm, padding: 'NoPadding'));
-  final decrypted = encrypter.decrypt64(encryptedText, iv: iv);
-  return decrypted;
-}
+String encryptAESGCM(String plainText, String base64Key, String base64IV) {<br/>
+  final encrypter = Encrypter(AES(Key(base64Decode(base64Key)), mode: AESMode.gcm));<br/>
+  final encrypted = encrypter.encrypt(plainText, iv: IV.fromBase64(base64IV));<br/>
+  return encrypted.base64;<br/>
+}<br/>
 
-Now use it where you want encryption/decryption
-String enc =
-      'R4Z7BmHFVQgqrKf0aNpxbGatt5NSyeJRMQJXGEE6KC5Cf4yXxM9NEwwpIq3IYrWq2kVvMLFIXzDYfLcOcbYnSEV3cWxRoGN+TzZZnd29aM2cW6pHmjA7kMIzWpzXTUU=';
-  String decTExt = decryptAESGCM(enc, 'testkey123456789', 'VtnYPGZ6KELIKmqt');
-  print(decTExt);
+String decryptAESGCM(String encryptedText, String decryptionKey, String ivBase64) {<br/>
+  IV iv = IV.fromBase64(ivBase64);<br/>
+  Uint8List key = getUint8List(decryptionKey);<br/>
+  final encrypter = Encrypter(AES(Key(key), mode: AESMode.gcm, padding: 'NoPadding'));<br/>
+  final decrypted = encrypter.decrypt64(encryptedText, iv: iv);<br/>
+  return decrypted;<br/>
+}<br/>
+
+Now use it wherever you want<br/>
+String enc = 'R4Z7BmHFVQgqrKf0aNpxbGatt5NSyeJRMQJXGEE6KC5Cf4yXxM9NEwwpIq3IYrWq2kVvMLFIXzDYfLcOcbYnSEV3cWxRoGN+TzZZnd29aM2cW6pHmjA7kMIzWpzXTUU='; <br/>
+  String decTExt = decryptAESGCM(enc, 'testkey123456789', 'VtnYPGZ6KELIKmqt');<br/>
+  print(decTExt);<br/>
   
 # Output 
 flutter: This is a plain text, encrypting it with AES/GCM/NoPadding algo with 12 byte IV
