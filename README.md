@@ -121,4 +121,35 @@ String text="this is a plain text from flutter";<br/>
 String encryptedText= encryptAESGCM(plainText: text, encryptionKey: 'testkey123456789', base64IV: iv);<br/>
 now you can share encryptedText and iv in API call.<br/>
 
-Thanks.
+
+# AES-GCM in React Js
+# encryption 
+export const encryptData = async (plaintext)=>{<br/>
+const key16Byte="1234567890123456";<br/>
+  const key=await crypto.subtle.importKey("raw",Buffer.from(key16Byte),{name : "AES-GCM", length : 256},true,["encrypt","decrypt"]);<br/>
+  const iv= crypto.getRandomValues(new Uint8Array(12));<br/>
+  const enc= await crypto.subtle.encrypt({<br/>
+    name:"AES-GCM",<br/>
+    iv:iv<br/>
+  },key,<br/>
+    new TextEncoder().encode(plaintext));<br/>
+    console.log(enc);<br/>
+  console.log({cipher: Buffer.from(enc).toString("base64"),iv: Buffer.from(iv).toString("base64")})<br/>
+}<br/>
+# decryption 
+export const decryptData = async (encryptedText,ivBase64)=>{<br/>
+  const key16Byte="1234567890123456";<br/>
+  const key=await crypto.subtle.importKey("raw",Buffer.from(key16Byte),{name : "AES-GCM", length : 256},true,["encrypt","decrypt"]);<br/>
+  const clearText= await crypto.subtle.decrypt({<br/>
+    name:"AES-GCM",<br/>
+    iv: Buffer.from(ivBase64,"base64")<br/>
+  },key,<br/>
+    Buffer.from(encryptedText,"base64"));<br/>
+    console.log('decryptData clearText='+clearText);<br/>
+  const data=new TextDecoder().decode(clearText);<br/>
+  console.log(data)<br/>
+}<br/>
+
+
+
+# Thanks for reading, I'm pleased to help you.
